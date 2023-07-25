@@ -1,6 +1,9 @@
 Name : Rahul Suryakant Salunkhe
-Class : MCA sem - II
 Roll No. : 55
+Class : MCA sem - II
+Practical No. : 1
+Practical Name : Implement the Find-S Inductive Learning algorithm.
+Date : 15-05-2023
                                                                            
 #Implement the Find-S Inductive Learning algorithm.
 import csv

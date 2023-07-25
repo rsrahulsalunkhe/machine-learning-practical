@@ -1,6 +1,9 @@
 Name : Rahul Suryakant Salunkhe
-Class : MCA sem - II
 Roll No. : 55
+Class : MCA sem - II
+Practical No. : 2
+Practical Name : Implement the Candidate-Elimination Inductive Learning algorithm.
+Date : 15-05-2023
                                                                            
 #Implement the Candidate-Elimination Inductive Learning algorithm.
 import numpy as np

@@ -1,6 +1,9 @@
 Name : Rahul Suryakant Salunkhe
-Class : MCA sem - II
 Roll No. : 55
+Class : MCA sem - II
+Practical No. : 2
+Practical Name : Write a Program for Confusion Matrix and calculate Precision, Recall, F-Measure.
+Date : 17-07-2023
                                                                            
 #Write a Program for Confusion Matrix and calculate Precision, Recall, F-Measure.
 

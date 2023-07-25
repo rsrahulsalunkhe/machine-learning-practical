@@ -1,0 +1,85 @@
+import pandas as pd
+import math
+
+def calculate_entropy(data, target_col):
+    entropy = 0
+    total_count = len(data)
+    target_values = data[target_col].unique()
+    
+    for target_value in target_values:
+        p_i = len(data[data[target_col] == target_value]) / total_count
+        entropy -= p_i * math.log2(p_i)
+    
+    return entropy
+
+def calculate_information_gain(data, attr_col, target_col):
+    total_entropy = calculate_entropy(data, target_col)
+    attr_values = data[attr_col].unique()
+    
+    weighted_entropy = 0
+    for attr_value in attr_values:
+        subset = data[data[attr_col] == attr_value]
+        p_i = len(subset) / len(data)
+        entropy_i = calculate_entropy(subset, target_col)
+        weighted_entropy += p_i * entropy_i
+        
+    information_gain = total_entropy - weighted_entropy
+    return information_gain
+
+def calculate_split_information(data, attr_col):
+    split_info = 0
+    total_count = len(data)
+    attr_values = data[attr_col].unique()
+    
+    for attr_value in attr_values:
+        p_i = len(data[data[attr_col] == attr_value]) / total_count
+        split_info -= p_i * math.log2(p_i)
+    
+    return split_info
+
+def calculate_gain_ratio(data, attr_col, target_col):
+    information_gain = calculate_information_gain(data, attr_col, target_col)
+    split_info = calculate_split_information(data, attr_col)
+    
+    if split_info == 0:
+        return 0
+    else:
+        gain_ratio = information_gain / split_info
+        return gain_ratio
+
+def calculate_gini_index(data, target_col):
+    gini_index = 1
+    total_count = len(data)
+    target_values = data[target_col].unique()
+    
+    for target_value in target_values:
+        p_i = len(data[data[target_col] == target_value]) / total_count
+        gini_index -= p_i ** 2
+        
+    return gini_index
+
+if __name__ == "__main__":
+    # Sample dataset (replace this with your actual dataset)
+    data = pd.DataFrame({
+        "attr1": [1, 0, 1, 0, 1],
+        "attr2": [0, 1, 1, 0, 1],
+        "target": ["A", "B", "A", "B", "C"]
+    })
+
+    target_col = "target"
+
+    # Calculate Information Gain for each attribute
+    for attr_col in data.columns:
+        if attr_col != target_col:
+            information_gain = calculate_information_gain(data, attr_col, target_col)
+            print(f"Information Gain for {attr_col}: {information_gain:.4f}")
+
+    # Calculate Gain Ratio for each attribute
+    for attr_col in data.columns:
+        if attr_col != target_col:
+            gain_ratio = calculate_gain_ratio(data, attr_col, target_col)
+            print(f"Gain Ratio for {attr_col}: {gain_ratio:.4f}")
+
+    # Calculate Gini Index for the target attribute
+    gini_index = calculate_gini_index(data, target_col)
+    print(f"Gini Index for {target_col}: {gini_index:.4f}")
